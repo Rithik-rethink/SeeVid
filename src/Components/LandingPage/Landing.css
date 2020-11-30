@@ -48,6 +48,12 @@
 .scroll-button{
     color : red;
     letter-spacing: 1px;
+    font-size: x-large;
+    cursor: pointer;
+}
+.scroll-button:hover {
+    border-bottom: 3px ridge;
+    
 }
 .segments {
     margin-top : 51%;

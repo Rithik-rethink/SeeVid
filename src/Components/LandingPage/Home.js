@@ -1,4 +1,4 @@
-import React,{useEffect , useRef , useState} from 'react';
+import React from 'react';
 import './Landing.css';
 import Pictures from './Pictures.js';
 import Desc from './Desc.js';

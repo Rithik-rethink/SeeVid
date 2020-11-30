@@ -46,7 +46,7 @@ function Desc(){
                         <span ref = {el => {line2 = el}}>dolor sit,</span><br/>
                         <span ref = {el => {line3 = el}}>consectetur</span></h1>
                     <p className = 'explaination col-12 col-sm-12' ref = {el => {body = el}}>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-                    <h3 className = 'scroll-button mt-5 col-12 col-sm-6'>Get Started <a href = '#section-2' className ='btn scroll-button-icon'><ArrowForwardIcon/></a></h3>
+                    <h3 className = 'scroll-button mt-5 col-12 col-sm-6'>Get Started <a href = '/in' className ='btn scroll-button-icon'><ArrowForwardIcon/></a></h3>
                 </div>
                 <div className = 'segments' id = 'section-2' >
                     <p className = 'headings col-12 col-sm-12'>overview</p>
