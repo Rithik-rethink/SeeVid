@@ -8,7 +8,7 @@ import TwitterIcon from '@material-ui/icons/Twitter';
 
 function Footer(){
     return(
-        <div className = 'footer'>
+        <div className = 'footer padd-u'>
             <div className = 'footer-layer1 container'>
                 <div className = 'row footer-row'>
                     <div className = 'col-12 col-sm-6 left'>

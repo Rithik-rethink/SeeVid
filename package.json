@@ -24,6 +24,7 @@
     "reset-css": "^5.0.1",
     "sass": "^1.29.0",
     "scrollmagic": "^2.0.8",
+    "swup": "^2.0.12",
     "universal-cookie": "^4.0.4",
     "web-vitals": "^0.2.4"
   },
