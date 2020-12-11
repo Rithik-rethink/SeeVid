@@ -20,7 +20,16 @@ class Register extends React.Component{
             logged_in : false
         }
     }
-    
+    componentDidMount(){
+        Axios.get('http://localhost:8080/api/user/dashboard',{withCredentials : true}).then((res)=>{
+            this.setState({
+                logged_in : true
+            })
+        }).catch((err)=>{
+            console.log(err.message);
+        })
+    }
+
     handleChange(event , element){
         var value = event.currentTarget.value;
         if(element === 'email'){
@@ -46,9 +55,36 @@ class Register extends React.Component{
         
     }
     handleClick(event){
-        console.log('Button Clicked');
+        var params = {
+            "username" : this.state.username,
+            "email" : this.state.email,
+            "password" : this.state.password
+        }
+        const url ='http://localhost:8080/api/user/register' 
+        Axios.post(url , params, {
+            "headers" : {
+                "Accept" : "application/json",
+                "content-type" : "application/json",
+            },
+            withCredentials : true
+        }).then(response => {
+            this.setState({
+                code : response.data.code
+            })
+        }).catch(err => {
+            console.log(err);
+            this.setState({
+                error : err.response.data.message
+            })
+        });
     }
     render(){
+        if(this.state.logged_in){
+            return(<Redirect to = "/in"/>);
+        }
+        if(this.state.code === 0){
+            return(<Redirect to={{pathname: "/in", state: {token: this.state.token}}}/>);
+        }
         return(
             <div className = 'container register'>
                 <h1 className = 'logo2'>SeeVid</h1>

@@ -1,6 +1,5 @@
 html {
     font-size: 10px;
-
 }
 body {
     background-color: whitesmoke;
@@ -28,7 +27,7 @@ h4{
 }
 h4:hover {
     transition: 200ms all ease;
-    color : rgb(255, 217, 0);
+    color : #3f51b5;
 }
 .options {
     text-align: right;
@@ -37,7 +36,7 @@ h4:hover {
     border-bottom: 1px ridge grey;
 }
 .social-footer:hover{
-    color : rgb(255, 217, 0);
+    color : #3f51b5;
     transition: 200ms all ease;
     cursor: pointer;
 }

@@ -18,7 +18,15 @@ class Login extends React.Component{
             dest:"/login"
         }
     }
-    
+    componentDidMount(){
+        Axios.get('http://localhost:8080/api/user/dashboard',{withCredentials : true}).then((res)=>{
+            this.setState({
+                logged_in : true
+            })
+        }).catch((err)=>{
+            console.log(err.message);
+        })
+    }
     handleChange(event , element){
         var value = event.currentTarget.value;
         if(element === "email"){
@@ -33,10 +41,56 @@ class Login extends React.Component{
         }
     }
     handleClick(){
-        console.log('Log In button clicked')
+        var params = {
+            "email" : this.state.email,
+            "password":this.state.password
+        };
+        var url = 'http://localhost:8080/api/user/login';
+        // fetch(url, {method: "POST",
+        //     "headers":{
+        //         "Accept": 'application/json',
+        //         "content-type":"application/json",
+                
+        //     },
+        //     body: JSON.stringify(params),
+        //     credentials: "include"
+        // })
+        Axios.post(url,params,{
+            "headers":{
+                        "Accept": 'application/json',
+                        "content-type":"application/json",
+                    },
+                    withCredentials : true
+        }).then((res) => {
+            console.log(res);
+            this.setState({
+                code: 0,
+                dest : "/in"
+            })
+        }).catch((err) =>{
+            console.log(err.response)
+            if(err.response) {
+                this.setState({
+                    error : true,
+                    error_message : err.response.data.message
+                })
+            }
+            else {
+                this.setState({
+                    error: true,
+                    error_message: err.message
+                })
+            }
+        })
+
     }
     render(){
-        
+        if(this.state.logged_in){
+            return(<Redirect to = "/in"/>);
+        }
+        if(this.state.code === 0){
+            return(<Redirect to={{pathname: "/in", state: {token: this.state.dest}}}/>);
+        }
         return(
             <div className = 'container register'>
                 <h1 className = 'logo2'>SeeVid</h1>
