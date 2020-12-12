@@ -5,6 +5,10 @@
     justify-content: space-around;
     align-items: center;
 }
+.sub{
+    height: 600px;
+    overflow-y: scroll;
+}
 .jumbo{
     margin-top:5%;
     text-align: center;

@@ -62,13 +62,11 @@ class Login extends React.Component{
                     },
                     withCredentials : true
         }).then((res) => {
-            console.log(res);
             this.setState({
                 code: 0,
                 dest : "/in"
             })
         }).catch((err) =>{
-            console.log(err.response)
             if(err.response) {
                 this.setState({
                     error : true,

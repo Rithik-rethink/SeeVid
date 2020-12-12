@@ -7,7 +7,7 @@ function Samples (){
     const vids = url.map((vid)=>{
         return(
                 <div className = 'col-12 col-sm-3 mb-4'>
-                    <ReactPlayer url={vid} width = '100%' height = '100%'/>        
+                    <ReactPlayer url={vid} width = '100%' height = '100%' muted/>        
                 </div>
         );
     })

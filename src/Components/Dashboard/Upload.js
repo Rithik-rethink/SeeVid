@@ -1,19 +1,63 @@
-import React, { useState } from 'react';
+import React, { useState , useEffect} from 'react';
 import './Dashboard.css';
 import Header from './Header.js';
 import CloseIcon from '@material-ui/icons/Close';
 import {TextField} from '@material-ui/core';
 import {Button} from '@material-ui/core';
 import {FormControlLabel,Checkbox} from '@material-ui/core';
+import Axios from 'axios';
+import {Redirect} from 'react-router-dom';
+
 
 function Upload() {
     const [Check , setCheck] = useState(false);
     const [Url , setUrl] = useState('');
     const [Name , setName] = useState('');
-
+    const [Log , setLog] = useState(false);
+    const [Err , setErr] = useState('');
+    const [Error , setError] = useState(false);
+    const [Upload , setUpload] = useState(false);
+      useEffect(()=>{
+          Axios.get('http://localhost:8080/api/user/dashboard',{withCredentials : true}).then((res)=>{
+              setLog(false);
+            }).catch((err)=>{
+                setLog(true);
+            })
+        },[]);
+    
+    const handleClick = ()=>{
+        if(Url === '' || Name === ''){
+            setErr('Please Enter all the fields');
+            setError(true);
+        }
+        else{
+            setError(false);
+            var payload = {
+                "url" : Url,
+                "VideoName" : Name
+            };
+            const url = 'http://localhost:8080/api/user/upload';
+            Axios.post(url , payload , {
+                "headers":{
+                            "Accept": 'application/json',
+                            "content-type":"application/json",
+                        },
+                        withCredentials : true
+            }).then((res)=>{
+                setUpload(true);
+            }).catch((err)=>{
+                setError(true);
+                setErr(err.response.data.message);
+            })
+        }
+        
+    }
     return(
         <div>
             <Header/>
+            {Upload? <Redirect to ='/'/>:<div/>}
+            {Log?<Redirect to = '/login'/>:<div/>}
+
             <div className = 'upload'>
                 <div className = 'container'>
                     <div className = 'mediaup mt-5'>
@@ -32,7 +76,8 @@ function Upload() {
                             label = "By checking this box, I certify that use of any facial recognition functionality in this service is not by or for a police department in the United States, and I represent that I have all rights (and individuals’ consents, where applicable) to use and store the file/data, and agree that it will be handled per the Online Services Terms and the Privacy Statement."
                             labelPlacement = 'end'
                         />
-                        {Check?<Button variant = 'contained'  className = 'mt-3' color = 'primary' style = {{width : '30%'}}>Upload</Button>:<Button variant = 'contained'  className = 'mt-3' color = 'primary' disabled style = {{width : '30%'}}>Upload</Button>}
+                        {Error ? <p className = 'error'><b>{Err}</b></p>:<p></p>}
+                        {Check?<Button variant = 'contained'  className = 'mt-3' color = 'primary' style = {{width : '30%'}} onClick = {handleClick}>Upload</Button>:<Button variant = 'contained'  className = 'mt-3' color = 'primary' disabled style = {{width : '30%'}} onClick = {handleClick}>Upload</Button>}
                     </form>
                 </div>
             </div>

@@ -54,7 +54,9 @@ const useStyles = makeStyles((theme) => ({
                     </div>
                 </div>
 
-                {Lib?<Library/>:<Samples/>}
+                <div className = 'sub'>
+                    {Lib?<Library/>:<Samples/>}
+                </div>
             <Footer/>
         </div>
     );
