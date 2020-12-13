@@ -20,7 +20,7 @@ function Library (){
     const vids = Videos.map((vid)=>{
         let temp = vid.url.split('&')[0];
         return(
-                <div className = 'col-12 col-sm-3 mb-4'>
+                <div className = 'col-12 col-sm-3 mb-4 mt-4'>
                     
                     <ReactPlayer url={temp} width = '100%' height = '100%'/>
                     <h1>{vid.name}</h1>        

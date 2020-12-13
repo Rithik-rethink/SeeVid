@@ -17,6 +17,7 @@ function Upload() {
     const [Err , setErr] = useState('');
     const [Error , setError] = useState(false);
     const [Upload , setUpload] = useState(false);
+    const [Query , setQuery] = useState('');
       useEffect(()=>{
           Axios.get('http://localhost:8080/api/user/dashboard',{withCredentials : true}).then((res)=>{
               setLog(false);
@@ -26,7 +27,7 @@ function Upload() {
         },[]);
     
     const handleClick = ()=>{
-        if(Url === '' || Name === ''){
+        if(Url === '' || Name === '' || Query === ''){
             setErr('Please Enter all the fields');
             setError(true);
         }
@@ -34,7 +35,8 @@ function Upload() {
             setError(false);
             var payload = {
                 "url" : Url,
-                "VideoName" : Name
+                "VideoName" : Name,
+                "Query" : Query
             };
             const url = 'http://localhost:8080/api/user/upload';
             Axios.post(url , payload , {
@@ -55,7 +57,7 @@ function Upload() {
     return(
         <div>
             <Header/>
-            {Upload? <Redirect to ='/'/>:<div/>}
+            {Upload? <Redirect to ='/player'/>:<div/>}
             {Log?<Redirect to = '/login'/>:<div/>}
 
             <div className = 'upload'>
@@ -69,6 +71,8 @@ function Upload() {
                     <form className = 'form' noValidate autoComplete="off">
                         <TextField id="outlined-basic" className = 'col-12 col-sm-12 ' label="Enter URL" type = 'url' variant="outlined" onChange = {(e)=>{setUrl(e.target.value);}}/>
                         <TextField id="outlined-basic" className = 'mt-5 col-12 col-sm-12' label="Video name" variant="outlined" onChange = {(e)=>{setName(e.target.value);}}/>
+                        <TextField id="outlined-basic" className = 'mt-5 col-12 col-sm-12' label="What do you want to search for?" variant="outlined" onChange = {(e)=>{setQuery(e.target.value);}}/>
+                        
                         <FormControlLabel 
                             className = 'mt-5 mb-5'
                             onChange = {()=>{setCheck(!Check)}}

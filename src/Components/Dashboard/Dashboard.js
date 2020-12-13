@@ -27,8 +27,10 @@ const useStyles = makeStyles((theme) => ({
       const [Lib , setLib] = useState(true);
       const [Sam , setSam] = useState(false);
       const [Log , setLog] = useState(false);
+      
       useEffect(()=>{
           Axios.get('http://localhost:8080/api/user/dashboard',{withCredentials : true}).then((res)=>{
+              
               setLog(false);
             }).catch((err)=>{
                 setLog(true);

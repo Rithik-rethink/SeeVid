@@ -5,6 +5,7 @@ import Dashboard from './Components/Dashboard/Dashboard.js';
 import Login from './Components/Login/Login.js';
 import Register from './Components/Register/Register.js';
 import Upload from './Components/Dashboard/Upload.js';
+import Player from './Components/Dashboard/Player.js';
 
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
       <Route exact path = '/in' component = {Dashboard}/>
       <Route exact path = '/register' component = {Register}/>
       <Route exact path = '/up' component = {Upload}/>
+      <Route exact path = '/player' component = {Player}/>
     </div>
   );
 }
